@@ -1,0 +1,36 @@
+{
+  "name": "web-wolf3d",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "dependencies": {
+    "almost-equal": "^1.1.0",
+    "http-server": "^0.11.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/register": "^7.6.0",
+    "@webpack-cli/init": "^0.2.2",
+    "assert": "^2.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "eslint": "^5.16.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mocha": "^6.2.0",
+    "mocha-loader": "^3.0.0",
+    "webpack": "^4.39.3",
+    "webpack-cli": "^3.3.8",
+    "webpack-dev-server": "^3.8.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "start": "webpack-dev-server",
+    "webpack": "webpack",
+    "test": "mocha --require @babel/register ./test/**/*.js",
+    "test-grep": "mocha --require @babel/register ./test/**/*.js --grep GREP",
+    "debug": "mocha --require @babel/register ./test/**/*.js --grep GREP --inspect-brk"
+  },
+  "author": "",
+  "license": "ISC"
+}
