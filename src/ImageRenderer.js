@@ -46,6 +46,11 @@ export default class ImageRenderer {
       return;
     }
 
+
+    this.displayImpact(impact, rayIdx);
+  }
+
+  displayImpact(impact, rayIdx) {
     const screenX = rayIdx * this.screen.getWidth() / this.nbRays;
     const width = this.screen.getWidth() / this.nbRays;
 
