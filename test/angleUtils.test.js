@@ -1,6 +1,5 @@
 import assert from 'assert';
 import * as angleUtils from '../src/angleUtils';
-import { tsMappedType } from '@babel/types';
 
 describe('angleUtils', function () {
   describe('normalizeAngle', function () {
