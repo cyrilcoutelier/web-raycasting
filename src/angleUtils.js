@@ -58,3 +58,9 @@ export function isBetween(leftAngle, rightAngle, candidateAngle) {
     return candidateAngle <= leftAngle || candidateAngle >= rightAngle;
   }
 }
+
+export function getVec(angle) {
+  const x = Math.cos(angle);
+  const y = Math.sin(angle);
+  return { x, y };
+}

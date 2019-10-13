@@ -1,4 +1,6 @@
 import assert from 'assert';
+import almostEqual from 'almost-equal';
+
 import * as angleUtils from '../src/angleUtils';
 
 describe('angleUtils', function () {
@@ -213,5 +215,46 @@ describe('angleUtils', function () {
         assert.strictEqual(result, expected);
       });
     }
+  });
+
+  describe('getVec', function () {
+    // Given
+    [{
+      angle: 0,
+      expected: {
+        x: 1,
+        y: 0,
+      },
+    }, {
+      angle: 0.5,
+      expected: {
+        x: 0,
+        y: 1,
+      },
+    }, {
+      angle: 1,
+      expected: {
+        x: -1,
+        y: 0,
+      },
+    }, {
+      angle: 1.5,
+      expected: {
+        x: 0,
+        y: -1,
+      },
+    }].forEach(({ angle, expected }) => {
+      it(`${angle} * PI -> {x: ${expected.x}, y: ${expected.y}}`, function () {
+        angle *= Math.PI;
+        // When
+        const result = angleUtils.getVec(angle);
+
+        // Then
+        assert.ok(almostEqual(result.x, expected.x, 0.0000001),
+          `x, actual: ${result.x}, expected: ${expected.x}`);
+        assert.ok(almostEqual(result.y, expected.y, 0.0000001),
+          `y, actual: ${result.y}, expected: ${expected.y}`);
+      });
+    });
   });
 });
