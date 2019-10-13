@@ -1,5 +1,5 @@
 import * as angleUtils from './angleUtils';
-import castRay from './rayCasting/castRay';
+import castRayToWall from './rayCasting/castRayToWallToWall';
 
 const CAMERA_ANGLE = angleUtils.degreesToRadians(60);
 const NB_RAYS = 1024;
@@ -41,7 +41,7 @@ export default class ImageRenderer {
   }
 
   renderRay(rayIdx, rayAngle) {
-    const impact = castRay(this.world, this.player.x, this.player.y, rayAngle);
+    const impact = castRayToWall(this.world, this.player.x, this.player.y, rayAngle);
     if (impact === null) {
       return;
     }

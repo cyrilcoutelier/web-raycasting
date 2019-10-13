@@ -1,7 +1,7 @@
 import calcHorizontalImpact from './calcHorizontalImpact';
 import calcVerticalImpact from './calcVerticalImpact';
 
-export default function castRay(world, x, y, angle) {
+export default function castRayToWall(world, x, y, angle) {
   const horizontalImpact = calcHorizontalImpact(world, x, y, angle);
   const verticalImpact = calcVerticalImpact(world, x, y, angle);
   if (horizontalImpact === null && verticalImpact === null) {

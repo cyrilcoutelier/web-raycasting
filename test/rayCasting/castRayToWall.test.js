@@ -1,14 +1,14 @@
 import assert from 'assert';
 import almostEqual from 'almost-equal';
 
-import castRay from '../../src/rayCasting/castRay';
+import castRayToWall from '../../src/rayCasting/castRayToWall';
 
 import World from '../../src/World';
 import centralPillar from '../../src/maps/central-pillar';
 import * as TileType from '../../src/TileType';
 import cercledPillar from '../../src/maps/cercled-pillar';
 
-describe('rayCasting.castRay', function () {
+describe('rayCasting.castRayToWall', function () {
   it('going out of map', function () {
     // Given
     const world = new World(centralPillar);
@@ -17,7 +17,7 @@ describe('rayCasting.castRay', function () {
     const angle = 0.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     assert.strictEqual(impact, null);
@@ -30,7 +30,7 @@ describe('rayCasting.castRay', function () {
     const angle = 0.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
@@ -54,7 +54,7 @@ describe('rayCasting.castRay', function () {
     const angle = 0.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
@@ -78,7 +78,7 @@ describe('rayCasting.castRay', function () {
     const angle = 1.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
@@ -102,7 +102,7 @@ describe('rayCasting.castRay', function () {
     const angle = 1.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
@@ -126,7 +126,7 @@ describe('rayCasting.castRay', function () {
     const angle = 0.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
@@ -150,7 +150,7 @@ describe('rayCasting.castRay', function () {
     const angle = 0.25 * Math.PI;
 
     // When
-    const impact = castRay(world, sourceX, sourceY, angle);
+    const impact = castRayToWall(world, sourceX, sourceY, angle);
 
     // Then
     const expectedImpact = {
