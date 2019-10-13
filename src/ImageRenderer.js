@@ -1,5 +1,5 @@
 import * as angleUtils from './angleUtils';
-import castRayToWall from './rayCasting/castRayToWallToWall';
+import castRayToWall from './rayCasting/castRayToWall';
 
 const CAMERA_ANGLE = angleUtils.degreesToRadians(60);
 const NB_RAYS = 1024;
