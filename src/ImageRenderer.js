@@ -46,16 +46,16 @@ export default class ImageRenderer {
       return;
     }
 
-    const x = rayIdx * this.screen.getWidth() / this.nbRays;
+    const screenX = rayIdx * this.screen.getWidth() / this.nbRays;
     const width = this.screen.getWidth() / this.nbRays;
 
     const wallHeightProjectedOnScreen = this.distanceToScreen / impact.distance * this.worldScreenHeight;
     const height = wallHeightProjectedOnScreen * this.screen.getHeight() / this.worldScreenHeight;
-    const y = this.screen.getHeight() / 2 - height / 2;
+    const screenY = this.screen.getHeight() / 2 - height / 2;
 
     const color = getColor(impact);
 
-    this.screen.drawRect(x, y, width, height, color);
+    this.screen.drawRect(screenX, screenY, width, height, color);
   }
 
 }
