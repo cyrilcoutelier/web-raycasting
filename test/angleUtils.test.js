@@ -149,4 +149,70 @@ describe('angleUtils', function () {
       });
     });
   });
+
+  describe('isBetween', function () {
+    describe('non encompassing 0', () => {
+      // Given
+      [{
+        leftAngle: 0.5,
+        rightAngle: 0,
+        candidateAngle: 0.25,
+        expected: true,
+      }, {
+        leftAngle: 0.5,
+        rightAngle: 0,
+        candidateAngle: 0.6,
+        expected: false,
+      }, {
+        leftAngle: 0.5,
+        rightAngle: 0,
+        candidateAngle: 1.8,
+        expected: false,
+      }, {
+        leftAngle: 1,
+        rightAngle: 0.5,
+        candidateAngle: 0.4,
+        expected: false,
+      }].forEach(generateTest);
+    });
+    describe('encompassing 0', () => {
+      // Given
+      [{
+        leftAngle: 0.25,
+        rightAngle: 1.75,
+        candidateAngle: 0,
+        expected: true,
+      }, {
+        leftAngle: 0.25,
+        rightAngle: 1.75,
+        candidateAngle: 0.1,
+        expected: true,
+      }, {
+        leftAngle: 0.25,
+        rightAngle: 1.75,
+        candidateAngle: 1.9,
+        expected: true,
+      }, {
+        leftAngle: 0.25,
+        rightAngle: 1.75,
+        candidateAngle: 0.5,
+        expected: false,
+      }, {
+        leftAngle: 0.25,
+        rightAngle: 1.75,
+        candidateAngle: 1.6,
+        expected: false,
+      }].forEach(generateTest);
+    });
+
+    function generateTest({ leftAngle, rightAngle, candidateAngle, expected }) {
+      it(`is ${candidateAngle} between ${leftAngle} and ${rightAngle}? => ${expected}`, function () {
+        // When
+        const result = angleUtils.isBetween(leftAngle * Math.PI, rightAngle * Math.PI, candidateAngle * Math.PI);
+
+        // Then
+        assert.strictEqual(result, expected);
+      });
+    }
+  });
 });

@@ -50,3 +50,11 @@ export function normalizeAngle(angle) {
     return angle;
   }
 }
+
+export function isBetween(leftAngle, rightAngle, candidateAngle) {
+  if (leftAngle > rightAngle) {
+    return leftAngle >= candidateAngle && candidateAngle >= rightAngle;
+  } else {
+    return candidateAngle <= leftAngle || candidateAngle >= rightAngle;
+  }
+}
