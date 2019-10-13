@@ -75,7 +75,7 @@ describe('angleUtils', function () {
     });
   });
   describe('isVerticalPositif', function () {
-    // Giben
+    // Given
     [{
       value: 0,
       expected: true,
@@ -112,7 +112,7 @@ describe('angleUtils', function () {
     });
   });
   describe('isHorizontalPositif', function () {
-    // Giben
+    // Given
     [{
       value: 0,
       expected: true,
