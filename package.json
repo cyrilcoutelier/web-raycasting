@@ -27,9 +27,9 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "webpack": "webpack",
-    "test": "mocha --require @babel/register ./test/**/*.js",
-    "test-grep": "mocha --require @babel/register ./test/**/*.js --grep GREP",
-    "debug": "mocha --require @babel/register ./test/**/*.js --grep GREP --inspect-brk"
+    "test": "mocha --require @babel/register --recursive ./test/",
+    "test-grep": "mocha --require @babel/register --recursive ./test/ --grep GREP",
+    "debug": "mocha --require @babel/register --recursive ./test/ --grep GREP --inspect-brk"
   },
   "author": "",
   "license": "ISC"
