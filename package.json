@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "almost-equal": "^1.1.0",
+    "babel-polyfill": "^6.26.0",
     "http-server": "^0.11.1"
   },
   "devDependencies": {
@@ -27,9 +28,9 @@
     "build": "webpack",
     "start": "webpack-dev-server",
     "webpack": "webpack",
-    "test": "mocha --require @babel/register --recursive ./test/",
-    "test-grep": "mocha --require @babel/register --recursive ./test/ --grep GREP",
-    "debug": "mocha --require @babel/register --recursive ./test/ --grep GREP --inspect-brk"
+    "test": "mocha --require @babel/register --require babel-polyfill --recursive ./test/",
+    "test-grep": "mocha --require @babel/register --require babel-polyfill --recursive ./test/ --grep GREP",
+    "debug": "mocha --require @babel/register --require babel-polyfill --recursive ./test/ --grep GREP --inspect-brk"
   },
   "author": "",
   "license": "ISC"

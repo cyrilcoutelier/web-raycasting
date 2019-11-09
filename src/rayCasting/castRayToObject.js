@@ -30,6 +30,8 @@ export default function castRayToObject(object, x, y, rayAngle) {
     distance: distanceToImpact,
     x: impactCoordinate.x,
     y: impactCoordinate.y,
+    targetWidth: object.width,
+    targetX: 0,
     target: object,
   };
 

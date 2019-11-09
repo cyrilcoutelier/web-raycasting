@@ -5,15 +5,18 @@ import castRayToObject from './rayCasting/castRayToObject';
 import * as TileType from './TileType';
 
 const CAMERA_ANGLE = angleUtils.degreesToRadians(60);
-const NB_RAYS = 1024;
+const NB_RAYS = 80;
 const WORLD_SCREEN_HEIGHT = 1.5;
+const WALL_HEIGHT = 1;
 
+const PIXEL_SHUTTLE = [0, 0, 0, 0];
 
 export default class ImageRenderer {
   constructor({
     screen,
     world,
     player,
+    textures,
     nbRays = NB_RAYS,
     cameraAngle = CAMERA_ANGLE,
     worldScreenHeight = WORLD_SCREEN_HEIGHT,
@@ -21,6 +24,7 @@ export default class ImageRenderer {
     this.nbRays = nbRays;
     this.cameraAngle = cameraAngle;
     this.worldScreenHeight = worldScreenHeight;
+    this.textures = textures;
 
     this.screen = screen;
     this.world = world;
@@ -84,17 +88,34 @@ export default class ImageRenderer {
 
   displayImpact(impact, rayIdx) {
     const screenX = rayIdx * this.screen.getWidth() / this.nbRays;
-    const width = this.screen.getWidth() / this.nbRays;
 
-    const wallHeightProjectedOnScreen = this.distanceToScreen / impact.distance * this.worldScreenHeight;
-    const height = wallHeightProjectedOnScreen * this.screen.getHeight() / this.worldScreenHeight;
-    const screenY = this.screen.getHeight() / 2 - height / 2;
+    const textureName = this.getTextureName(impact);
+    const texture = this.textures.get(textureName);
+    const targetWidth = impact.targetWidth;
+    const targetX = impact.targetX;
+    const textureX = targetX * texture.getWidth() / targetWidth;
 
-    const color = getColor(impact);
+    const screenWidth = this.screen.getWidth() / this.nbRays;
 
-    this.screen.drawRect(screenX, screenY, width, height, color);
+    const objectHeightProjectedOnScreen = this.distanceToScreen / impact.distance * WALL_HEIGHT;
+    const objectScreenHeight = objectHeightProjectedOnScreen * this.screen.getHeight() / this.worldScreenHeight;
+    const objectTopScreenY = Math.floor(this.screen.getHeight() / 2 - objectScreenHeight / 2);
+    const objectBottomScreenY = Math.floor(objectTopScreenY + objectScreenHeight);
+    for (let screenY = objectTopScreenY; screenY < objectBottomScreenY; screenY++) {
+      const relativeY = screenY - objectTopScreenY;
+      const textureY = relativeY* texture.getHeight() / objectScreenHeight;
+      texture.getPixelData(textureX, textureY, PIXEL_SHUTTLE);
+      this.screen.drawImageData(screenX, screenY, screenWidth, 1, PIXEL_SHUTTLE);
+    }
   }
 
+  getTextureName(impact) {
+    if (impact.target.type === TileType.WALL) {
+      return 'cyril_poster_v1.jpg';
+    } else {
+      return impact.target.texture;
+    }
+  }
 }
 
 function isNotNull(entity) {
@@ -115,14 +136,6 @@ function getImpactsBeforeOpaqueWall(impacts) {
 
 function isOpaqueWall(impact) {
   return impact.target.type === TileType.WALL;
-}
-
-function getColor(impact) {
-  if (impact.target.type === TileType.WALL) {
-    return getWallColor(impact);
-  } else {
-    return 'orange';
-  }
 }
 
 function getWallColor(impact) {

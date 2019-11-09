@@ -3,7 +3,7 @@ const columns = {
   description: '',
   spawnPosition: {
     x: 0.5,
-    y: 0.5,
+    y: 9.4,
     angle: Math.PI * 0.1,
   },
   data: [
