@@ -8,6 +8,11 @@ export default class World {
     this.width = map.data[0].length;
     this.data = map.data;
     this.spawnPosition = map.spawnPosition;
+    this.items = [];
+  }
+
+  addItem(item) {
+    this.items.push(item);
   }
 
   getSpawnPosition() {

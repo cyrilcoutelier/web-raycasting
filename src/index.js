@@ -35,6 +35,18 @@ function main() {
   });
 
   const world = new World(map);
+
+  world.addItem({
+    x: 2,
+    y: 2,
+    width: 0.5
+  });
+  world.addItem({
+    x: 5,
+    y: 2,
+    width: 0.5
+  });
+
   const player = new Player(world.getSpawnPosition());
   const renderer = new ImageRenderer({
     screen,
