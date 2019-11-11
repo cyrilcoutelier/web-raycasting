@@ -50,3 +50,17 @@ export function getLinesIntersection(leftPos, leftVec, rightPos, rightVec) {
   result.y = leftPos.y + (a * (leftVec.y));
   return result;
 }
+
+export function add(left, right) {
+  return {
+    x: left.x + right.x,
+    y: left.y + right.y,
+  };
+}
+
+export function applyNorm(srcVec, norm) {
+  return {
+    x: srcVec.x * norm,
+    y: srcVec.y * norm,
+  };
+}

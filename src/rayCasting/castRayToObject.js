@@ -21,6 +21,7 @@ export default function castRayToObject(object, x, y, rayAngle) {
 
   const rayVec = angleUtils.getVec(rayAngle);
   const impactCoordinate = vectorUtils.getLinesIntersection(object, tangentVec, cameraPos, rayVec);
+  const targetX = computeTargetX(object, impactCoordinate, diffVec);
   if (impactCoordinate === null) {
     throw new Error('The ray and the object should cross');
   }
@@ -31,9 +32,21 @@ export default function castRayToObject(object, x, y, rayAngle) {
     x: impactCoordinate.x,
     y: impactCoordinate.y,
     targetWidth: object.width,
-    targetX: 0,
+    targetX,
     target: object,
   };
 
   return impact;
+}
+
+function computeTargetX(object, impact, cameraToObjectVec) {
+  let angle = vectorUtils.getAngle(cameraToObjectVec);
+  angle += Math.PI / 2;
+  angle = angleUtils.normalizeAngle(angle);
+  let centerToEdgeVec = angleUtils.getVec(angle);
+  centerToEdgeVec = vectorUtils.applyNorm(centerToEdgeVec, object.width / 2);
+  let leftEdgePos = vectorUtils.add(object, centerToEdgeVec);
+  let edgeImpactDistance = vectorUtils.getDiff(leftEdgePos, impact);
+  let targetX = vectorUtils.getNorm(edgeImpactDistance);
+  return targetX;
 }

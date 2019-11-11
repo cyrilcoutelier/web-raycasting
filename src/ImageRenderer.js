@@ -138,16 +138,3 @@ function isOpaqueWall(impact) {
   return impact.target.type === TileType.WALL;
 }
 
-function getWallColor(impact) {
-  if (impact.x === impact.target.x) {
-    return 'blue';
-  } else if (impact.x - 1 === impact.target.x) {
-    return 'yellow';
-  } else if (impact.y === impact.target.y) {
-    return 'red';
-  } else if (impact.y - 1 === impact.target.y) {
-    return 'green';
-  } else {
-    return 'grey';
-  }
-}
