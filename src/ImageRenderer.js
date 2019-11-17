@@ -5,7 +5,7 @@ import castRayToObject from './rayCasting/castRayToObject';
 import * as TileType from './TileType';
 
 const CAMERA_ANGLE = angleUtils.degreesToRadians(60);
-const NB_RAYS = 80;
+const NB_RAYS = 1024;
 const WORLD_SCREEN_HEIGHT = 1.5;
 const WALL_HEIGHT = 1;
 
@@ -36,6 +36,7 @@ export default class ImageRenderer {
 
   renderImage() {
     this.screen.clear();
+    this.screen.loadImageData();
 
     this.getObjectsInFieldOfView();
     const leftAngle = angleUtils.normalizeAngle(this.player.getHorizontalAngle() + (this.cameraAngle / 2));
@@ -46,6 +47,7 @@ export default class ImageRenderer {
       rayAngle = angleUtils.normalizeAngle(rayAngle);
       this.renderRay(rayIdx, rayAngle);
     }
+    this.screen.putImageData();
   }
 
   getObjectsInFieldOfView() {
@@ -103,9 +105,9 @@ export default class ImageRenderer {
     const objectBottomScreenY = Math.floor(objectTopScreenY + objectScreenHeight);
     for (let screenY = objectTopScreenY; screenY < objectBottomScreenY; screenY++) {
       const relativeY = screenY - objectTopScreenY;
-      const textureY = relativeY* texture.getHeight() / objectScreenHeight;
+      const textureY = relativeY * texture.getHeight() / objectScreenHeight;
       texture.getPixelData(textureX, textureY, PIXEL_SHUTTLE);
-      this.screen.drawImageData(screenX, screenY, screenWidth, 1, PIXEL_SHUTTLE);
+      this.screen.writeRect(screenX, screenY, screenWidth, 1, PIXEL_SHUTTLE);
     }
   }
 
